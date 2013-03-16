@@ -1,20 +1,22 @@
-CFLAGS=-g -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
-LIBS=-ldl $(OPTLIBS)
+CFLAGS=-g -Wall -Wextra -rdynamic -DNDEBUG -Isrc $(OPTFLAGS)
+LIBS= -ldl $(OPTLIBS)
 PREFIX?=/usr/local
 
 SOURCES=$(wildcard src/**/*.c src/*.c)
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 
 TEST_SRC=$(wildcard tests/*_tests.c)
-TESTS=$(patsubst %.c,%,$(TEST_SRC))
 
-TARGET=build/libYOUR_LIBRARY.a
+# list of tests to be executed
+TESTS= tests/list_tests
+
+TARGET=build/liblcthw.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
 # The Target Build
 all: $(TARGET) $(SO_TARGET) tests
 
-dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
+dev: CFLAGS=-g -Wall -Wall -Wextra -Isrc $(OPTFLAGS)
 dev: all
 
 $(TARGET): CFLAGS += -fPIC
@@ -31,9 +33,12 @@ build:
 
 # The Unit Tests
 .PHONY: tests
-tests: CFLAGS += $(TARGET)
 tests: $(TESTS)
 	sh ./tests/runtests.sh
+
+# compilation rule for each test, includes static library
+tests/%_tests: tests/%_tests.c $(TARGET)
+	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
 
 valgrind:
 	VALGRIND="valgrind --log-file=/tmp/valgrind-%p.log" $(MAKE)
