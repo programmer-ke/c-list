@@ -6,4 +6,6 @@ Includes:
 
 - dynamic arrays
 
+- qsort using a dynamic array
+
 Adapted from Zed Shaw's book: http://c.learncodethehardway.org/book/ex28.html
