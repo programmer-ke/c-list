@@ -8,7 +8,7 @@ OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 TEST_SRC=$(wildcard tests/*_tests.c)
 
 # list of tests to be executed
-TESTS= tests/list_tests tests/darray_tests tests/darray_algos_tests
+TESTS= tests/list_tests tests/darray_tests tests/darray_algos_tests tests/radixmap_tests
 
 TARGET=build/liblcthw.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))

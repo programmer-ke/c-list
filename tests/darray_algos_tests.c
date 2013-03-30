@@ -30,7 +30,7 @@ int is_sorted(DArray *array)
   return 1;
 }
 
-char * run_sort_test(int (*func)(DArray *, DArray_compare), const char *name)
+char *run_sort_test(int (*func)(DArray *, DArray_compare), const char *name)
 {
   DArray *words = create_words();
   mu_assert(!is_sorted(words), "Words should start not sorted.");
