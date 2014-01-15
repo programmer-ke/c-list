@@ -125,11 +125,11 @@ void *List_remove(List *list, ListNode *node)
     list->last = NULL;
   } else if(node == list->first) {
     list->first = node->next;
-    check(list->first != NULL, "Invalid list, somehow got a first that is a NULL.");
+    check(list->first != NULL, "Invalid list, somehow got a node that is a NULL.");
     list->first->prev = NULL;
   } else if(node == list->last) {
     list->last = node->prev;
-    check(list->last != NULL, "Invalid list, somehow got a next that is a NULL.");
+    check(list->last != NULL, "Invalid list, somehow got a node that is a NULL.");
     list->last->next = NULL;
   } else {
     ListNode *after = node->next;
