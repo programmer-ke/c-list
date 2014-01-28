@@ -34,10 +34,10 @@ void List_clear_destroy(List *list)
 	"list count is incorrect");
     
   LIST_FOREACH(list, first, next, cur) {
-    free(cur->value);
-    if (cur->prev) {
+    if (cur->value) 
+      free(cur->value);
+    if (cur->prev)
       free(cur->prev);
-    }
   }
   free(list->last);
   free(list);
@@ -110,12 +110,12 @@ void *List_shift(List *list)
 
 void *List_remove(List *list, ListNode *node)
 {
+  void *result = NULL;
+
   check(list != NULL, "list to be modified is NULL");
   check((list->count > 0 && list->first != NULL) || 
 	(list->count == 0 && list->first == NULL), 
 	"list count is incorrect");
-
-  void *result = NULL;
   
   check(list->first && list->last, "List is empty.");
   check(node, "node can't be null");
@@ -144,7 +144,7 @@ void *List_remove(List *list, ListNode *node)
 
   /*invariant*/
   check((list->count > 0 && list->first != NULL) || 
-	(list->count == 0 && list->first == NULL), 
+	(list->count == 0 && list->first == NULL && list->last == NULL),
 	"list count is incorrect");
 
  error:
