@@ -8,6 +8,11 @@ List *List_create()
 
 void List_destroy(List *list)
 {
+  check(list != NULL, "List to be destroyed in NULL");
+  check((list->count > 0 && list->first != NULL) || 
+	(list->count == 0 && list->first == NULL), 
+	"list count is incorrect");
+
   LIST_FOREACH(list, first, next, cur) {
     if (cur->prev) {
       free(cur->prev);
@@ -16,13 +21,22 @@ void List_destroy(List *list)
 
   free(list->last);
   free(list);
+ error:
+  return;
 }
 
 void List_clear(List *list)
 {
+  check(list != NULL, "List to be destroyed in NULL");
+  check((list->count > 0 && list->first != NULL) || 
+	(list->count == 0 && list->first == NULL), 
+	"list count is incorrect");
+
   LIST_FOREACH(list, first, next, cur) {
     free(cur->value);
   }
+ error:
+  return;
 }
 
 void List_clear_destroy(List *list) 
@@ -35,7 +49,7 @@ void List_clear_destroy(List *list)
     
   LIST_FOREACH(list, first, next, cur) {
     if (cur->value) 
-      free(cur->value);
+      free(cur->value); 
     if (cur->prev)
       free(cur->prev);
   }
@@ -72,8 +86,11 @@ void List_push(List *list, void *value)
 
 void *List_pop(List *list)
 {
+  check(list != NULL, "List to pop item from is NULL");
   ListNode *node = list->last;
   return node != NULL ? List_remove(list, node) : NULL;
+ error:
+  return NULL;
 }
 
 void List_unshift(List *list, void *value)
@@ -104,8 +121,11 @@ void List_unshift(List *list, void *value)
 
 void *List_shift(List *list)
 {
+  check(list != NULL, "List to be shifted is NULL");
   ListNode  *node = list->first;
   return node != NULL ? List_remove(list, node) : NULL;
+ error:
+  return NULL;
 }
 
 void *List_remove(List *list, ListNode *node)

@@ -5,12 +5,15 @@
 
 struct ListNode;
 
+/*Node in a list, with pointers to the node's value, next element in list
+  and previous node in list*/
 typedef struct ListNode {
   struct ListNode *next;
   struct ListNode *prev;
   void *value;
 } ListNode;
 
+/*List structure with pointers to first and last elements*/
 typedef struct List {
   int count;
   ListNode *first;
