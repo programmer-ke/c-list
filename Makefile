@@ -8,8 +8,8 @@ OBJECTS=$(patsubst %.c,%.o,$(SOURCES))  # make a list of .o files from SOURCES
 TEST_SRC=$(wildcard tests/*_tests.c)
 
 # list of tests to be executed
-# TESTS= tests/list_tests tests/darray_tests tests/darray_algos_tests tests/radixmap_tests
-TESTS=$(patsubst %.c,%,$(TEST_SRC))
+TESTS= tests/list_tests tests/darray_tests tests/darray_algos_tests tests/radixmap_tests
+
 
 TARGET=build/liblcthw.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
@@ -42,8 +42,8 @@ tests: $(TESTS)
 	sh ./tests/runtests.sh
 
 # compilation rule for each test, includes static library
-#tests/%_tests: tests/%_tests.c $(TARGET)
-#	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
+tests/%_tests: tests/%_tests.c $(TARGET)
+	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
 
 # Define VALGRIND the execute make again
 valgrind:
