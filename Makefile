@@ -37,11 +37,11 @@ build:
 
 # The Unit Tests
 .PHONY: tests  # ignores the already existing directory and always run
-tests: CFLAGS += $(TARGET)
 tests: $(TESTS)
 	sh ./tests/runtests.sh
 
 # compilation rule for each test, includes static library
+# fails to compile if target is placed before .c files
 tests/%_tests: tests/%_tests.c $(TARGET)
 	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
 
@@ -64,7 +64,7 @@ install: all
 
 # The Checker
 BADFUNCS='[^_.>a-zA-Z0-9](str(n?cpy|n?cat|xfrm|n?dup|str|pbrk|tok_)|stpn?cpy|a?sn?printf|byte_)'
-# @ prefix - make only prints the relevant output
+# @ prefix - make only prints the relevant output, not command being executed
 check:
 	@echo Files with potentially dangerous functions.
 	@egrep $(BADFUNCS) $(SOURCES) || true
