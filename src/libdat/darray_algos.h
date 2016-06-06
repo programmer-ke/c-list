@@ -1,7 +1,7 @@
 #ifndef _darray_algos_h
 #define _darray_algos_h
 
-#include <lcthw/darray.h>
+#include <libdat/darray.h>
 
 typedef int(*DArray_compare)(const void *a, const void *b);
 

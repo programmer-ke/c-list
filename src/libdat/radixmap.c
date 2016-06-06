@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <lcthw/radixmap.h>
-#include <lcthw/dbg.h>
+#include <libdat/radixmap.h>
+#include <libdat/dbg.h>
 
 RadixMap *RadixMap_create(size_t max)
 {

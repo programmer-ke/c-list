@@ -11,7 +11,7 @@ TEST_SRC=$(wildcard tests/*_tests.c)
 TESTS= tests/list_tests tests/darray_tests tests/darray_algos_tests tests/radixmap_tests
 
 
-TARGET=build/liblcthw.a
+TARGET=build/libdat.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
 # The Target Build  
