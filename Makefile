@@ -36,12 +36,12 @@ build:
 	@mkdir -p bin
 
 # The Unit Tests
-.PHONY: tests  # ignores the already existing directory and always run
+.PHONY: tests  # ignores the already existing directory to always run
 tests: $(TESTS)
 	sh ./tests/runtests.sh
 
 # compilation rule for each test, includes static library
-# fails to compile if target is placed before .c files
+# position of TARGET is significant
 tests/%_tests: tests/%_tests.c $(TARGET)
 	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
 
