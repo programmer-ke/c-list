@@ -27,7 +27,7 @@ void List_destroy(List *list)
 
 void List_clear(List *list)
 {
-  check(list != NULL, "List to be destroyed in NULL");
+  check(list != NULL, "List to be destroyed is NULL");
   check((list->count > 0 && list->first != NULL) || 
 	(list->count == 0 && list->first == NULL), 
 	"list count is incorrect");

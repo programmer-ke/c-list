@@ -53,6 +53,7 @@ void *List_shift(List *list);
 void *List_remove(List *list, ListNode *node);
 
 /*Macro to iterate from first to last element in the list*/
+// L - list name, S - first node name, M - next node name, V - current node name
 #define LIST_FOREACH(L, S, M, V)				\
   ListNode *_node = NULL;					\
   ListNode *V = NULL;						\

@@ -17,6 +17,7 @@ char *test_create()
 
 char *test_destroy()
 {
+  mu_assert(list != NULL, "List to be destroyed is already NULL.");
   List_clear_destroy(list);
   
   return NULL;
