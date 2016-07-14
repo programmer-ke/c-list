@@ -53,7 +53,11 @@ void List_clear_destroy(List *list)
     if (cur->prev)
       free(cur->prev);
   }
-  free(list->last);
+  
+  if (list->last != NULL) {
+    free(list->last);
+  }
+  
   free(list);
  error:
   return;
@@ -138,7 +142,7 @@ void *List_remove(List *list, ListNode *node)
 	"list count is incorrect");
   
   check(list->first && list->last, "List is empty.");
-  check(node, "node can't be null");
+  check(node != NULL, "node can't be null");
   
   if (node == list->first && node == list->last) {
     list->first = NULL;
