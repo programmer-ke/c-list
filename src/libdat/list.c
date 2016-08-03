@@ -49,7 +49,7 @@ void List_clear_destroy(List *list)
     
   LIST_FOREACH(list, first, next, cur) {
     if (cur->value) 
-      free(cur->value); 
+      free(cur->value); // but what if value is stack allocated.. undefined behaviour
     if (cur->prev)
       free(cur->prev);
   }
@@ -145,17 +145,21 @@ void *List_remove(List *list, ListNode *node)
   check(node != NULL, "node can't be null");
   
   if (node == list->first && node == list->last) {
+    // node to remove is only item in list
     list->first = NULL;
     list->last = NULL;
   } else if(node == list->first) {
+    // node to remove is the first item
     list->first = node->next;
     check(list->first != NULL, "Invalid list, somehow got a node that is a NULL.");
     list->first->prev = NULL;
   } else if(node == list->last) {
+    // node to remove is the last item
     list->last = node->prev;
     check(list->last != NULL, "Invalid list, somehow got a node that is a NULL.");
     list->last->next = NULL;
   } else {
+    // node to remove is neither first nor last
     ListNode *after = node->next;
     ListNode *before = node->prev;
     after->prev = before;
