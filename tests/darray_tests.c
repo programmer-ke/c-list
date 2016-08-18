@@ -9,7 +9,7 @@ char *test_create()
 {
   array = DArray_create(sizeof(int), 100);
   mu_assert(array != NULL, "DArray create failed.");
-  mu_assert(array->contents != NULL, "contents are in the wrong darray.");
+  mu_assert(array->contents != NULL, "no space for darray content detected.");
   mu_assert(array->end == 0, "end isn't at the right spot");
   mu_assert(array->element_size == sizeof(int), "element size is wrong size");
   mu_assert(array->max == 100, "wrong max length in initial size");

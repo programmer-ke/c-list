@@ -13,6 +13,8 @@ typedef struct DArray {
   void **contents;
 } DArray;
 
+/*Returns a pointer to a Darray structure on the heap */
+/* Initial size of `contents` will be 'void *' `initial_max` times */
 DArray *DArray_create(size_t element_size, size_t initial_max);
 
 void DArray_destroy(DArray *array);
@@ -61,6 +63,7 @@ static inline void *DArray_remove(DArray *array, int i)
   return el;
 }
 
+// Returns a pointer to a blank space that fits and array's element
 static inline void *DArray_new(DArray *array)
 {
   check(array->element_size > 0, "Can't use DArray_new on 0 size darrays.");
