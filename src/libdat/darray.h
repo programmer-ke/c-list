@@ -21,8 +21,11 @@ void DArray_destroy(DArray *array);
 
 void DArray_clear(DArray *array);
 
+// Expand array by its expand rate
 int DArray_expand(DArray *array);
 
+// Contract to either last element, or expand rate size
+// whichever is bigger
 int DArray_contract(DArray *array);
 
 int DArray_push(DArray *array, void *el);
@@ -48,6 +51,7 @@ static inline void DArray_set(DArray *array, int i, void *el)
   return;
 }
 
+// Returns a pointer to the element at position i
 static inline void *DArray_get(DArray *array, int i)
 {
   check(i < array->max, "darray attempt to get past max");
@@ -56,6 +60,7 @@ static inline void *DArray_get(DArray *array, int i)
   return NULL;
 }
 
+// Returns pointer to element at posiion i, replacing it with NULL
 static inline void *DArray_remove(DArray *array, int i)
 {
   void *el = array->contents[i];
@@ -63,7 +68,7 @@ static inline void *DArray_remove(DArray *array, int i)
   return el;
 }
 
-// Returns a pointer to a blank space that fits and array's element
+// Returns a pointer to a blank space that fits the array's element
 static inline void *DArray_new(DArray *array)
 {
   check(array->element_size > 0, "Can't use DArray_new on 0 size darrays.");

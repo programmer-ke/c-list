@@ -33,6 +33,8 @@ void DArray_clear(DArray *array)
   }
 }
 
+
+// Resizes array->contents to newsize returning 0 on success
 static inline int DArray_resize(DArray *array, size_t newsize) 
 {
   array->max = newsize;
@@ -49,14 +51,16 @@ static inline int DArray_resize(DArray *array, size_t newsize)
   return -1;
 }
 
+// expand array by its expand rate
 int DArray_expand(DArray *array)
 {
   size_t old_max = array->max;
   check(DArray_resize(array, array->max + array->expand_rate) == 0,
 	"Failed to expand array to new size: %d",
 	array->max + (int)array->expand_rate);
-  
-  memset(array->contents + old_max, 0, array->expand_rate + 1);
+
+  // initialize the extra space with zeros
+  memset(array->contents + old_max, 0, array->expand_rate + 1); // why expand-rate + 1?
   return 0;
  error:
   return -1;
