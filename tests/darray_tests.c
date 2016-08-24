@@ -10,7 +10,7 @@ char *test_create()
   array = DArray_create(sizeof(int), 100);
   mu_assert(array != NULL, "DArray create failed.");
   mu_assert(array->contents != NULL, "no space for darray content detected.");
-  mu_assert(array->end == 0, "end isn't at the right spot");
+  mu_assert(array->end == -1, "End isn't at the right spot");
   mu_assert(array->element_size == sizeof(int), "element size is wrong size");
   mu_assert(array->max == 100, "wrong max length in initial size");
 
@@ -39,8 +39,9 @@ char *test_new()
 char *test_set()
 {
   DArray_set(array, 0, val1);
+  mu_assert(array->end == 0, "Value for last index is wrong");
   DArray_set(array, 1, val2);
-
+  mu_assert(array->end == 1, "Value for last index is wrong");
   return NULL;
 }
 
@@ -94,6 +95,7 @@ char *test_push_pop()
   }
 
   mu_assert(array->max == 1201, "Wrong max size.");
+  mu_assert(array->end == 999, "Wrong index of last element");
   
   for (i = 999; i >= 0; i--) {
     int *val = DArray_pop(array);
@@ -101,6 +103,8 @@ char *test_push_pop()
     mu_assert(*val == i * 333, "Wrong value.");
     DArray_free(val);
   }
+
+  mu_assert(array->end == -1, "Wrong index of last element");
 
   return NULL;
 }

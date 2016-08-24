@@ -6,8 +6,8 @@
 #include <libdat/dbg.h>
 
 typedef struct DArray {
-  int end;
-  int max;
+  int end;  // index of last element in array
+  int max;  // maximum length of array
   size_t element_size;
   size_t expand_rate;
   void **contents;
@@ -42,6 +42,7 @@ void DArray_clear_destroy(DArray *array);
 
 #define DEFAULT_EXPAND_RATE 300
 
+// Insert el into array at position i
 static inline void DArray_set(DArray *array, int i, void *el)
 {
   check(i < array->max, "darray attempt to set past max");
