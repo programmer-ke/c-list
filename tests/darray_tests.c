@@ -1,5 +1,6 @@
 #include "minunit.h"
 #include <libdat/darray.h>
+#include <stdint.h>
 
 static DArray *array = NULL;
 static int *val1 = NULL;
@@ -79,6 +80,12 @@ char *test_expand_contract()
   int old_max = array->max;
   DArray_expand(array);
   mu_assert((unsigned int)array->max == old_max + array->expand_rate, "Wrong size after expand.");
+
+  // All the extra space should have been initialized as zeroes
+  int i = 0;
+  for (i = old_max; i < array->max; i++) {
+    mu_assert((uintptr_t)array->contents[i] == 0, "Extra space not correctly initialized.");
+  }  
   
   DArray_contract(array);
   mu_assert((unsigned int)array->max == array->expand_rate + 1, "should stay at the expand rate at least.");

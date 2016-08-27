@@ -60,7 +60,7 @@ int DArray_expand(DArray *array)
 	array->max + (int)array->expand_rate);
 
   // initialize the extra space with zeros
-  memset(array->contents + old_max, 0, array->expand_rate + 1); // why expand-rate + 1?
+  memset(array->contents + old_max, 0, array->expand_rate);
   return 0;
  error:
   return -1;
