@@ -67,6 +67,10 @@ char *test_remove()
   mu_assert(DArray_get(array, 1) == NULL, "Should be gone.");
   DArray_free(val_check);
 
+  // Since all elements have been removed, reset `end` index
+  // This is so that succeeding test passes
+  array->end = -1;
+
   return NULL;
 }
 

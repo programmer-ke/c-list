@@ -69,7 +69,8 @@ int DArray_expand(DArray *array)
 
 int DArray_contract(DArray *array)
 {
-  int new_size = array->end < (int)array->expand_rate ? (int)array->expand_rate : array->end;
+  int maxels = DArray_end(array) + 1; // max possible elements in array
+  int new_size = maxels < (int)array->expand_rate ? (int)array->expand_rate : maxels;
   
   return DArray_resize(array, new_size + 1);
 }
@@ -91,23 +92,27 @@ void DArray_clear_destroy(DArray *array)
 
 int DArray_push(DArray *array, void *el)
 {
-  array->contents[array->end] = el;
-  array->end++;
-  
-  if(DArray_end(array) >= DArray_max(array)) {
-    return DArray_expand(array);
-  } else {
-    return 0;
+  // Expand array if necessary
+  int nxt = DArray_end(array) + 1;
+  if (nxt >= DArray_max(array)) {
+    int rc = DArray_expand(array);
+    check(rc == 0, "Failed to expand array");
   }
+  
+  array->contents[++array->end] = el;
+  return 0;
+  
+  error:
+  return -1;
 }
 
 void *DArray_pop(DArray *array)
 {
-  check(array->end - 1 >= 0, "attempt to pop from empty array.");
-  void *el = DArray_remove(array, array->end - 1);
-  array->end--;
-  
-  if(DArray_end(array) > (int)array->expand_rate && DArray_end(array) % array->expand_rate) {
+  check(DArray_end(array) >  -1, "attempt to pop from empty array.");
+  void *el = DArray_remove(array, array->end--);
+
+  int maxels = DArray_end(array) + 1;
+  if(maxels > (int)array->expand_rate && maxels % array->expand_rate) {
     DArray_contract(array);
   }
 
