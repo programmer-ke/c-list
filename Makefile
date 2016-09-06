@@ -43,7 +43,7 @@ tests: $(TESTS)
 # compilation rule for each test, includes static library
 # position of TARGET is significant
 tests/%_tests: tests/%_tests.c $(TARGET)
-	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -o $@
+	$(CC) $(CFLAGS) $@.c $(LIBS) $(TARGET) -lbsd -o $@
 
 # Define VALGRIND the execute make again
 valgrind:
