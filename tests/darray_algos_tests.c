@@ -64,8 +64,8 @@ char *all_tests()
   mu_suite_start();
   
   mu_run_test(test_qsort);
-  /*mu_run_test(test_heapsort); todo*/
-  /*mu_run_test(test_mergesort); todo*/
+  mu_run_test(test_heapsort);
+  mu_run_test(test_mergesort);
   
   return NULL;
 }
