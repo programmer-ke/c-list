@@ -8,7 +8,7 @@
 typedef struct DArray {
   int end;  // index of last element in array
   int max;  // maximum length of array
-  size_t element_size;
+  size_t element_size; // Used for creating elements via DArray_new
   size_t expand_rate;
   void **contents;
 } DArray;

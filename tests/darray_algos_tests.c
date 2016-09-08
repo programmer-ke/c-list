@@ -1,6 +1,8 @@
 #include "minunit.h"
 #include <libdat/darray_algos.h>
 
+char *words[] = {"asdfasdf", "werwar", "13234", "asdfasdf", "oioj" };
+
 int testcmp(char **a, char **b)
 {
   return strcmp(*a, *b);
@@ -9,7 +11,6 @@ int testcmp(char **a, char **b)
 DArray *create_words()
 {
   DArray *result = DArray_create(0, 5);
-  char *words[] = {"asdfasdf", "werwar", "13234", "asdfasdf", "oioj" };
   int i = 0;
   
   for(i=0; i < 5; i++) {
