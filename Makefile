@@ -8,7 +8,7 @@ OBJECTS=$(patsubst %.c,%.o,$(SOURCES))  # make a list of .o files from SOURCES
 TEST_SRC=$(wildcard tests/*_tests.c)
 
 # list of tests to be executed
-TESTS= tests/list_tests tests/darray_tests tests/darray_algos_tests tests/radixmap_tests
+TESTS= tests/list_tests
 
 
 TARGET=build/libdat.a
