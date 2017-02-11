@@ -1,13 +1,6 @@
-### A library collection
+# NAME
+	c-list - A doubly linked-list implementation in C
 
-Includes:
+# SYNOPSIS
+	TODO
 
-- double linked lists implementation
-
-- dynamic arrays
-
-- qsort using a dynamic array
-
-- Radix sort
-
-Based on Zed Shaw's excellent book: http://c.learncodethehardway.org
