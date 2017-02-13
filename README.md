@@ -1,7 +1,7 @@
 # NAME
 
 List_create, List_destroy, List_clear, List_clear_destroy, List_push, List_pop,
-List_unshift, List_shift, List_remove - manipulation of a doubly linked list
+List_unshift, List_shift, List_remove - manipulate a doubly linked list
 
 # SYNOPSIS
 
