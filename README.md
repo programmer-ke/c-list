@@ -5,7 +5,7 @@ List_unshift, List_shift, List_remove - manipulation of a doubly linked list
 
 # SYNOPSIS
 
-#include "list.h"
+\#include "list.h"
 
 List *List_create()
 
@@ -27,29 +27,29 @@ void *List_remove(List *list, ListNode *node)
 
 # DESCRIPTION
 
-list *list_create() returns a pointer to a newly created list
+`list *list_create()` returns a pointer to a newly created list
 
-void list_destroy(list *list) destroys the list and all nodes in it. ignores the
+`void list_destroy(list *list)` destroys the list and all nodes in it. ignores the
 fact that the nodes may have values
 
-void list_clear(list *list) clears the values of all nodes in the list
+`void list_clear(list *list)` clears the values of all nodes in the list
 
-void list_clear_destroy(list *list) first clears the values in all the list 
+`void list_clear_destroy(list *list)` first clears the values in all the list 
 nodes, then destroys the list and all its nodes
 
-void list_push(list *list, void *value) creates a node at the end of the list 
+`void list_push(list *list, void *value)` creates a node at the end of the list 
 and assigns value to it
 
-void *list_pop(list *list) removes the last node in the list and returns its 
+`void *list_pop(list *list)` removes the last node in the list and returns its 
 value
 
-void list_unshift(list *list, void *value) creates a new node at the beginning 
+`void list_unshift(list *list, void *value)` creates a new node at the beginning 
 of the list and gives it the specified value
 
-void *list_shift(list *list) removes the first node if it exists and returns its
+`void *list_shift(list *list)` removes the first node if it exists and returns its
 value
 
-void *list_remove(list *list, listnode *node) removes the given node from the 
+`void *list_remove(list *list, listnode *node)` removes the given node from the 
 list and returns its value
 
 The the list node structure is defined as:
