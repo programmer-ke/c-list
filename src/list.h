@@ -30,7 +30,7 @@ void List_destroy(List *list);
 void List_clear(List *list);
 
 /*Clears the values in all the list nodes then destroys the list
- and all it's nodes*/
+ and all its nodes*/
 void List_clear_destroy(List *list);
 
 #define List_count(A) ((A)->count)
